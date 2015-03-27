@@ -12,8 +12,7 @@ with sqlite3.connect("blog.db") as conn:
 
 	# create the table
 	c.execute("""CREATE TABLE posts
-		(title text
-		(post text
+		(title text, post text)
 		""")
 
 	# insert dummy data into the table
