@@ -1,22 +1,23 @@
 
-# sql.py - Create an SQLite3 table and populate it with data
+#blog.py - controller
 
 
+# imports
+from flash import Flask, render_template, request, session, \
+	flash, redirect, url_for, g
 import sqlite3
 
-# create a new database if the db doesn't already exist
-with sqlite3.connect("blog.db") as conn:
+# configuration - 'constants' use UPPERCASE
+DATABASE = 'blog.db'
 
-	# get a cursor
-	c = conn.cursor()
+app = Flash(__name__)
 
-	# create the table
-	c.execute("""CREATE TABLE posts
-		(title text
-		(post text
-		""")
+# pulls in app confiruration by looking for UPPERCASE variables
+app.config.from_object(__name__)
 
-	# insert dummy data into the table
-	c.execute('INSERT INTO posts values ("Good", "I\'m good.")')
-	c.execute('INSERT INTO posts values ("well", "I\'m well.")')
-	c.execute('INSERT INTO posts values ("Excellent", "I\'m exellent.")')
+# function used for connecting to the DATABASE
+def connect_db():
+	return sqlite3.connect(app.config['DATABASE'])
+
+if __name__ == '__main__':
+	app.run(debug=True)
